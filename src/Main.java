@@ -1,59 +1,38 @@
-//REGEX Möglichkeiten:
-// - Wörter erkennen: z.B. darf nur aus Buchstaben besetehen
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
-
-    private int amount_rows = 0;
-    private int count_words = 0;
-    private int count_letters = 0;
-
-
-    private void function() {
-
-        /* HIER OUTPUT VON IO*/ String[] output_buffered_reader = {"Ic(h", "Test123 45", "!er=", "äöüß"};      //zählt 45 als Wort? -> CONTAINS min 1 BUCHSTABE
-
-        amount_rows = output_buffered_reader.length;
-
-        String[] words;
-
-        for(int i=0; i<output_buffered_reader.length; i++)
-        {
-            words = output_buffered_reader[i].split("\\s+"); //Wörter durch Leerzeichen trennen
-
-            count_words += words.length; //Anzahl an getrennten Wörter wird zur aktuellen Anzahl an Wörtern dazugezählt
-
-            count_letters += getAmountLettersInWord(output_buffered_reader[i]); //zurückgegebene Anzahl an Buchstaben wird zur aktuellen Anzahl dazugezählt
-        }
-
-        System.out.println( // Ausgabe von Werten
-                "Ausgabe: " + "\n" +
-                        "Anzahl Reihen: " + amount_rows + "\n" +
-                        "Anzahl Wörter: " + count_words + "\n" +
-                        "Anzahl Buchstaben: " + count_letters + "\n"
-        );
-    }
-
-    private int getAmountLettersInWord(String word){
-
-        int count_letters = 0;
-
-        String regex = "[A-Za-zöäüß]"; // Teste Wort auf Buchstaben
-
-        Pattern pattern = Pattern.compile(regex); //Lege Muster fest
-        Matcher matcher = pattern.matcher(word); //ein Wort auf Muster überprüfen
-
-        while (matcher.find()) //Zählt alle gefundenen Klein- & Großbuchstaben
-            count_letters++;
-
-        return count_letters; //gibt Anzahl an gefundenen Buchstaben zurück
-    }
-
     public static void main(String[] args) {
-        Main main = new Main();
-        main.function();
+        System.out.print("Absoluter Pfad einer Text-Datei eingeben: ");
+        UserInput input = new UserInput();
+        String filePath = input.getInput();
 
+        try (BufferedReader br = new BufferedReader((new FileReader(filePath)))) {
+            Counter c = new Counter();
+
+            int linesCount = 0;
+            int wordCount = 0;
+            int lettersCount = 0;
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                linesCount++;
+                wordCount = wordCount + c.getWordsCount(line);
+                lettersCount = lettersCount + c.getLettersCount(line);
+            }
+
+            br.close();
+
+            System.out.print("Anzahl Zeilen: " + linesCount + "\n");
+            System.out.print("Anzahl Wörter: " + wordCount + "\n");
+            System.out.print("Anzahl Buchstaben: " + lettersCount + "\n");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: Datei " + filePath + " nicht gefunden!");
+        } catch (IOException e) {
+            System.out.println("ERROR: Fehler beim Öffnen der Datei " + filePath + "!");
+        }
     }
 }
