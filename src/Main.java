@@ -18,6 +18,7 @@ public class Main {
 
             String line;
             while ((line = br.readLine()) != null) {
+                // count all lines that are not null
                 linesCount++;
                 wordCount = wordCount + c.getWordsCount(line);
                 lettersCount = lettersCount + c.getLettersCount(line);

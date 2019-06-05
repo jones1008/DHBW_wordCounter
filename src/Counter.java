@@ -4,13 +4,18 @@ import java.util.regex.Pattern;
 public class Counter {
 
     public int getWordsCount(String line){
-        String[] words = line.split("\\s+");
-        return words.length;
+        if (line.trim().isEmpty()) {
+            return 0;
+        } else {
+            String[] words = line.split("\\s", -1);
+            return words.length;
+        }
     }
 
     public int getLettersCount(String line){
-        Pattern pattern = Pattern.compile("[A-Za-zöäüß]");
-        Matcher matcher = pattern.matcher(line);
+        // "\p{L}" matches the Unicode Category: "any kind of letter from any language"
+        Pattern p = Pattern.compile("\\p{L}", Pattern.UNICODE_CHARACTER_CLASS);
+        Matcher matcher = p.matcher(line);
         int lettersCount = 0;
         while (matcher.find()) {
             lettersCount++;
