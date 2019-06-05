@@ -5,7 +5,8 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.print("Absoluter Pfad einer Text-Datei eingeben: ");
+        System.out.println("Für relativen Pfad die Text-Datei ablegen in: "+System.getProperty("user.dir"));
+        System.out.print("Absoluten oder relativen Pfad eingeben: ");
         UserInput input = new UserInput();
         String filePath = input.getInput();
 
