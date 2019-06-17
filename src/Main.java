@@ -1,9 +1,11 @@
+// Programmierer: Jonas Fluhrer (Einlesen der Datei)
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("Für relativen Pfad die Text-Datei ablegen in: "+System.getProperty("user.dir"));
         System.out.print("Absoluten oder relativen Pfad eingeben: ");

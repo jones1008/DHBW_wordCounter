@@ -1,3 +1,4 @@
+// Programmierer: Kaloyan Zahariev (Unit Tests)
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

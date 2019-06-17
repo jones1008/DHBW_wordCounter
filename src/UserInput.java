@@ -1,8 +1,10 @@
+// Programmierer: Jonas Fluhrer
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UserInput {
+
     private String input;
 
     public UserInput() {
