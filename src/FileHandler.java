@@ -30,7 +30,7 @@ class FileHandler {
             if(fileOpened) br.close();
         }
 
-        this.lines = fileContent.toArray(new String[fileContent.size()]);
+        this.lines = fileContent.toArray(new String[0]);
 
         return this.lines;
     }
