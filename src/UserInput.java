@@ -3,15 +3,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class UserInput {
+class UserInput {
 
     private String input;
 
-    public UserInput() {
+    UserInput() {
         this.input = "";
     }
 
-    public String getInput(){
+    String getInput(){
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             this.input = br.readLine();
         }

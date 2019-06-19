@@ -2,5 +2,5 @@ Diese Datei ist eine Test-Datei,
 um zu testen, wieviele Wörter in
 dieser Text-Datei sind.
 
-Dabei werden auch	<- Tabs
+Dabei werden auch	<-Tabs
 als Worttrennung berücksichtigt.
