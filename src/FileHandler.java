@@ -1,7 +1,6 @@
 // Programmierer: Jonas Fluhrer
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,21 +14,16 @@ class FileHandler {
 
 
     String[] readFile (String filePath) throws IOException {
-        BufferedReader br = null;
         String line;
         List<String> fileContent = new ArrayList<>();
-        boolean fileOpened = false;
 
-        try {
-            br = new BufferedReader((new FileReader(filePath)));
+        try(FileInputStream     fr = new FileInputStream(filePath);
+            InputStreamReader   ir = new InputStreamReader(fr, StandardCharsets.UTF_8);
+            BufferedReader      br = new BufferedReader(ir)){
             while ((line = br.readLine()) != null) {
                 fileContent.add(line);
             }
-            fileOpened = true;
-        } finally {
-            if(fileOpened) br.close();
         }
-
         this.lines = fileContent.toArray(new String[0]);
 
         return this.lines;
